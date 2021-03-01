@@ -188,3 +188,6 @@ if passed_challenge:
   print("You passed the challenge!")
 else:
   print("You haven't passed yet. Your model should identify at least 63% of the images. Keep trying. You will get it!")
+
+
+model.save("model")
