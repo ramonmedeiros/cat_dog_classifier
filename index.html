@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <title>Cat Dog Classifier</title>
+    <meta name="description" content="Simple Machine Learning Model into an WebApp using TensorFlow.js">
+    <meta name="keywords" content="Machine Learning, TensorFlow.js">
+    <meta name="author" content="Ramon Medeiros">
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+    <h1>Digit Recognition WebApp</h1>
+    <div id="image">
+      <form action="">
+        <input type="file" id="myFile" name="filename">
+        <input type="submit">
+      </form>
+    </div>
+    <div id="predicted">
+      Recognized animal
+      <div id="animal"></div>
+    </div>
+    <script>
+    var image = document.getElementById('myFile');
+
+    tf.loadGraphModel("https://ramonmedeiros.github.io/cat_dog_classifier/web_model/model.json").then(function(model) {
+      window.model = model;
+    });
+
+    var predict = function(input) {
+      if (window.model) {
+        window.model.predict([tf.tensor(input).reshape([1, 28, 28, 1])]).array().then(function(scores){
+          scores = scores[0];
+          predicted = scores.indexOf(Math.max(...scores));
+          document.getElementbyId("animal").innerHTML = predicted;
+        });
+      } else {
+        // The model takes a bit to load, if we are too fast, wait
+        setTimeout(function(){predict(input)}, 50);
+      }
+    }
+    </script>
+  </body>
+</html>
