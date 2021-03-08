@@ -8,7 +8,6 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 # DATA FROM https://cdn.freecodecamp.org/project-data/cats-and-dogs/cats_and_dogs.zip
 PATH = 'cats_and_dogs'
 
@@ -109,36 +108,18 @@ model.add(Flatten())
 model.add(Dense(512, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
-# train and save the model
-
-# set callback and path
-#checkpoint_path = "training_1/cp.ckpt"
-#checkpoint_dir = os.path.dirname(checkpoint_path)
-#
-## Create a callback that saves the model's weights
-#cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
-#                                                 save_weights_only=True,
-#                                                 verbose=1)
-#
-## if model exists, load it: otherwise train
-#if os.path.exists(checkpoint_path):
-#    pass
-#    #model.load_weights(checkpoint_path)
-#else:
-
 # Optimizer
 model.compile(optimizer='adam',
               loss='binary_crossentropy',
-              metrics=['accuracy'])
+              metrics=['accuracy']
+)
 
 history = model.fit(train_data_gen,
           steps_per_epoch=int(round(total_train / batch_size)),
           epochs=epochs,
           validation_data=val_data_gen,
           validation_steps=int(round(total_val / batch_size))
-          )
-
-
+)
 
 # check accuracy
 acc = history.history['accuracy']
@@ -190,4 +171,4 @@ else:
   print("You haven't passed yet. Your model should identify at least 63% of the images. Keep trying. You will get it!")
 
 
-model.save("model")
+model.save("web_model")
