@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <title>Cat Dog Classifier</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.5.2/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.2.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
     <script src="index.js"></script>
     <meta name="description" content="Simple Machine Learning Model into an WebApp using TensorFlow.js">
     <meta name="keywords" content="Machine Learning, TensorFlow.js">
@@ -10,8 +11,10 @@
   </head>
   <body>
     <h1>Digit Recognition WebApp</h1>
-    <input type="file" id="myFile" name="filename" onchange="previewFile();">
+    <input type="file" id="myFile" name="filename" onchange="previewFile()">
     <h1 id="predicted">Recognized animal</h1>
-    <img id="animal" alt="alt text" hidden="">
+    <img id="animal" hidden>
+    <img id="resized">
+    <canvas id="canva" width="150" height="150" hidden></canvas>
   </body>
 </html>
